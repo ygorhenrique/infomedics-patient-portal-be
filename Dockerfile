@@ -17,12 +17,10 @@ RUN dotnet publish -c Release -o /app/publish
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Production
 WORKDIR /app
 COPY --from=build /app/publish .
-
-# Expose ports
-EXPOSE 5000
-EXPOSE 5001
 
 # Set environment to Production by default
 ENV ASPNETCORE_ENVIRONMENT=Production
