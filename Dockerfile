@@ -22,7 +22,6 @@ ENV ASPNETCORE_ENVIRONMENT=Production
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# Set environment to Production by default
-ENV ASPNETCORE_ENVIRONMENT=Production
+EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "InfomedicsPortal.dll"] 
