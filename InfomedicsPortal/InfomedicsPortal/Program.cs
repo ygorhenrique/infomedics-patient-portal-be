@@ -4,6 +4,7 @@ using InfomedicsPortal.Core.Patients;
 using InfomedicsPortal.Core.Stats;
 using InfomedicsPortal.Core.Treatments;
 using InfomedicsPortal.Infrastructure.InMemory;
+using InfomedicsPortal.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,9 +39,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseCors("LocalCorsPolicy");
 }
 
-app.UseCors("LocalCorsPolicy");
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

@@ -25,6 +25,7 @@ public class PatientsController : ControllerBase
         var execResult = await _patientsService.AddPatient(patient);
         if (!execResult.IsSuccess)
         {
+            _logger.LogWarning("Failed to create patient: {Message}", execResult.Message);
             return BadRequest(execResult.Message);
         }
         
@@ -37,6 +38,7 @@ public class PatientsController : ControllerBase
         var patient = await _patientsService.GetPatientAsync(patientId);
         if (patient == null)
         {
+            _logger.LogWarning("Patient with ID {PatientId} not found", patientId);
             return NotFound($"Patient({patientId}) not found");
         }
         return Ok(patient);

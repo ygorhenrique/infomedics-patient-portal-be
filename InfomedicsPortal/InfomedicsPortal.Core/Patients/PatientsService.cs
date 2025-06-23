@@ -2,7 +2,7 @@ using InfomedicsPortal.Core.Appointments;
 
 namespace InfomedicsPortal.Core.Patients;
 
-public class PatientsService : IPatientsService
+public partial class PatientsService : IPatientsService
 {
     private readonly IPatientsStorage _storage;
     private readonly IAppointmentsService _appointmentsService;
@@ -52,37 +52,5 @@ public class PatientsService : IPatientsService
     {
         var getPatientResult = await _storage.GetAllPatientsAsync();
         return getPatientResult;
-    }
-    
-    
-
-    public class PatientWithAppointments
-    {
-        public Guid Id { get; }
-        public string FullName { get; }
-        public string Address { get; }
-        public Photo Photo { get; }
-        public DateTime CreatedAtUtc { get; }
-        public Appointment[] Appointments { get; }
-
-        public PatientWithAppointments(Patient? getPatientResult, Appointment[] appointments)
-        {
-            if (getPatientResult == null)
-            {
-                throw new ArgumentNullException(nameof(getPatientResult));
-            }
-
-            if (appointments == null)
-            {
-                throw new ArgumentNullException(nameof(appointments));
-            }
-            
-            Id = getPatientResult.Id;
-            FullName = getPatientResult.FullName;
-            Address = getPatientResult.Address;
-            Photo = getPatientResult.Photo;
-            CreatedAtUtc = getPatientResult.CreatedAtUtc;
-            Appointments = appointments;
-        }
     }
 }

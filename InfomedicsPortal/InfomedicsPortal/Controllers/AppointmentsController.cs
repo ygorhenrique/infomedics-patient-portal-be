@@ -28,6 +28,7 @@ public class AppointmentsController : ControllerBase
         var patientAppointments = await _service.GetAppointmentsByPatientIdAsync(patientId);
         if (patientAppointments == null)
         {
+            _logger.LogWarning("No appointments found: Patient with ID {PatientId} not found", patientId);
             return BadRequest();
         }
         
@@ -40,6 +41,11 @@ public class AppointmentsController : ControllerBase
         var scheduleAppointmentResult = await _service.AddAppointmentAsync(appointmentRequest);
         if (!scheduleAppointmentResult.IsSuccess)
         {
+            _logger.LogWarning(
+                "Failed to schedule appointment for PatientId {PatientId}: {Message}",
+                appointmentRequest.PatientId,
+                scheduleAppointmentResult.Message
+            );
             return BadRequest(scheduleAppointmentResult.Message);
         }
 
