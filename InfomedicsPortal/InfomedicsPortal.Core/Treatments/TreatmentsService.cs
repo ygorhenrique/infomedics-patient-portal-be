@@ -1,6 +1,6 @@
 namespace InfomedicsPortal.Core.Treatments;
 
-public class TreatmentsService
+public class TreatmentsService : ITreatmentsService
 {
     private readonly ITreatmentsStorage _storage;
 

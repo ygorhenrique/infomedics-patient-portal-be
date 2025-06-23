@@ -2,7 +2,7 @@ using InfomedicsPortal.Core.Patients;
 
 namespace InfomedicsPortal.Core.Appointments;
 
-public class AppointmentsService
+public class AppointmentsService : IAppointmentsService
 {
     private readonly IAppointmentsStorage _appointmentsStorage;
     private readonly IPatientsStorage _patientsStorage;
@@ -78,13 +78,31 @@ public class AppointmentsService
 
     public readonly struct PatientAppointment
     {
-        public Appointment Appointment { get; }
-        public Patient Patient { get; }
-        
+        public Guid AppointmentId { get; }
+        public Guid  PatientId { get; }
+        public Guid TreatmentId { get; }
+        public Guid DentistId { get; }
+        public DateTime AppointmentDateTime { get; }
+        public string Status { get; }
+
         public PatientAppointment(Appointment appointment, Patient patient)
         {
-            Appointment = appointment;
-            Patient = patient;
+            if (appointment == null)
+            {
+                throw  new ArgumentNullException(nameof(appointment));
+            }
+
+            if (patient == null)
+            {
+                throw  new ArgumentNullException(nameof(patient));
+            }
+            
+            this.PatientId = patient.Id;
+            this.AppointmentId = appointment.Id;
+            this.AppointmentDateTime = appointment.AppointmentDateTime;
+            this.DentistId = appointment.DentistId;
+            this.TreatmentId = appointment.TreatmentId;
+            this.Status = appointment.AppointmentDateTime > DateTime.UtcNow ? "scheduled" : "";
         }
     }
 }

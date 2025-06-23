@@ -1,6 +1,7 @@
 using InfomedicsPortal.Core.Appointments;
 using InfomedicsPortal.Core.Dentists;
 using InfomedicsPortal.Core.Patients;
+using InfomedicsPortal.Core.Stats;
 using InfomedicsPortal.Core.Treatments;
 using InfomedicsPortal.Infrastructure.InMemory;
 
@@ -20,10 +21,11 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
-builder.Services.AddScoped<AppointmentsService>();
-builder.Services.AddScoped<DentistsService>();
-builder.Services.AddScoped<PatientsService>();
-builder.Services.AddScoped<TreatmentsService>();
+builder.Services.AddScoped<IAppointmentsService, AppointmentsService>();
+builder.Services.AddScoped<IDentistsService, DentistsService>();
+builder.Services.AddScoped<IPatientsService, PatientsService>();
+builder.Services.AddScoped<ITreatmentsService, TreatmentsService>();
+builder.Services.AddScoped<IStatsService, StatsService>();
 
 builder.Services.AddSingleton<IAppointmentsStorage, AppointmentsRepository>();
 builder.Services.AddSingleton<IDentistsStorage, DentistsRepository>();

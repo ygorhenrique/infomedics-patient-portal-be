@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfomedicsPortal.Core", "In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfomedicsPortal.Infrastructure", "InfomedicsPortal.Infrastructure\InfomedicsPortal.Infrastructure.csproj", "{AD07FBF9-3E41-4737-A684-9F8A866EADFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfomedicsPortal.UnitTests", "InfomedicsPortal.UnitTests\InfomedicsPortal.UnitTests.csproj", "{C233FBA0-BFD2-44B7-8B1E-3F60C81F5D06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfomedicsPortal.UnitTests", "InfomedicsPortal.UnitTests\InfomedicsPortal.UnitTests.csproj", "{2CF091CB-5F19-4DF4-A3E8-702E36FA8F56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +26,9 @@ Global
 		{AD07FBF9-3E41-4737-A684-9F8A866EADFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD07FBF9-3E41-4737-A684-9F8A866EADFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD07FBF9-3E41-4737-A684-9F8A866EADFA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C233FBA0-BFD2-44B7-8B1E-3F60C81F5D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C233FBA0-BFD2-44B7-8B1E-3F60C81F5D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C233FBA0-BFD2-44B7-8B1E-3F60C81F5D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C233FBA0-BFD2-44B7-8B1E-3F60C81F5D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF091CB-5F19-4DF4-A3E8-702E36FA8F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF091CB-5F19-4DF4-A3E8-702E36FA8F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF091CB-5F19-4DF4-A3E8-702E36FA8F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF091CB-5F19-4DF4-A3E8-702E36FA8F56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

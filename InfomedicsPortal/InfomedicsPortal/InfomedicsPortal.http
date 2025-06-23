@@ -13,6 +13,10 @@
 @InfomedicsPortal_DentistId = 1e49c1b3-bf91-401f-8fcd-0a36972270f7
 @InfomedicsPortal_TreatmentId = 8d0fec4d-4cdc-4872-ad4e-62fc0bc755ce
 
+### Get stats
+GET {{InfomedicsPortal_HostAddress}}/stats/
+Accept: application/json
+
 ### Get list of treatments
 GET {{InfomedicsPortal_HostAddress}}/treatments/
 Accept: application/json

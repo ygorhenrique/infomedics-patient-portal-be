@@ -7,10 +7,10 @@ namespace InfomedicsPortal.Controllers;
 [Route("[controller]")]
 public class AppointmentsController : ControllerBase
 {
-    private readonly AppointmentsService _service;
+    private readonly IAppointmentsService _service;
     private readonly ILogger<AppointmentsController> _logger;
 
-    public AppointmentsController(AppointmentsService appointmentsService, ILogger<AppointmentsController> logger)
+    public AppointmentsController(IAppointmentsService appointmentsService, ILogger<AppointmentsController> logger)
     {
         _service = appointmentsService;
         _logger = logger;

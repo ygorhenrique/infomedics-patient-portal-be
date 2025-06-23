@@ -1,6 +1,6 @@
 namespace InfomedicsPortal.Core.Dentists;
 
-public class DentistsService
+public class DentistsService : IDentistsService
 {
     private readonly IDentistsStorage _storage;
 

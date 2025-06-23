@@ -1,18 +1,28 @@
+using InfomedicsPortal.Core.Appointments;
+
 namespace InfomedicsPortal.Core.Patients;
 
-public class PatientsService
+public class PatientsService : IPatientsService
 {
     private readonly IPatientsStorage _storage;
+    private readonly IAppointmentsService _appointmentsService;
 
-    public PatientsService(IPatientsStorage storage)
+    public PatientsService(
+        IAppointmentsService appointmentsService, 
+        IPatientsStorage storage)
     {
         this._storage = storage;
+        this._appointmentsService = appointmentsService;
     }
     
-    public async Task<Patient?> GetPatientAsync(Guid patientId)
+    public async Task<PatientWithAppointments?> GetPatientAsync(Guid patientId)
     {
         var getPatientResult = await _storage.GetPatientByIdAsync(patientId);
-        return getPatientResult;
+        if (getPatientResult == null)
+            return null;
+        
+        var appointments = await _appointmentsService.GetAppointmentsByPatientIdAsync(patientId) ?? [];
+        return new PatientWithAppointments(getPatientResult, appointments);
     }
 
     public async Task<ExecutionResult<Patient>> AddPatient(NewPatientRequest patient)
@@ -26,11 +36,6 @@ public class PatientsService
         {
             return ExecutionResult<Patient>.Failure("Address is required");
         }
-        
-        // if (string.IsNullOrEmpty(patient.Photo))
-        // {
-        //     return ExecutionResult<Patient>.Failure("Photo is required");
-        // }
 
         var addResult = await _storage.AddPatientAsync(new Patient()
         {
@@ -48,11 +53,36 @@ public class PatientsService
         var getPatientResult = await _storage.GetAllPatientsAsync();
         return getPatientResult;
     }
+    
+    
 
-    public class NewPatientRequest
+    public class PatientWithAppointments
     {
-        public string FullName { get; set; }
-        public string Address { get; set; }
-        public string Photo { get; set; }
+        public Guid Id { get; }
+        public string FullName { get; }
+        public string Address { get; }
+        public Photo Photo { get; }
+        public DateTime CreatedAtUtc { get; }
+        public Appointment[] Appointments { get; }
+
+        public PatientWithAppointments(Patient? getPatientResult, Appointment[] appointments)
+        {
+            if (getPatientResult == null)
+            {
+                throw new ArgumentNullException(nameof(getPatientResult));
+            }
+
+            if (appointments == null)
+            {
+                throw new ArgumentNullException(nameof(appointments));
+            }
+            
+            Id = getPatientResult.Id;
+            FullName = getPatientResult.FullName;
+            Address = getPatientResult.Address;
+            Photo = getPatientResult.Photo;
+            CreatedAtUtc = getPatientResult.CreatedAtUtc;
+            Appointments = appointments;
+        }
     }
 }
