@@ -1,0 +1,60 @@
+#
+#   Create RESTful API endpoints to manage patients and appointments:
+#   - POST /patients: Create a new patient.
+#   - GET /patients/{id}: Retrieve a patient’s details and appointments.
+#   - POST /appointments: Create a new appointment for a patient.
+#   - GET /appointments/{patientId}: Retrieve all appointments for a specific patient.
+#   - Use an in-memory database (SQLite, for example, or mock data) to store patients and appointments.
+#   - Handle basic error handling (e.g., returning proper HTTP status codes, validation errors).
+#
+
+@InfomedicsPortal_HostAddress = http://localhost:5297
+@InfomedicsPortal_PatientId = 2af5e7ca-e776-45c9-98c7-b75d614e9073
+@InfomedicsPortal_DentistId = 1e49c1b3-bf91-401f-8fcd-0a36972270f7
+@InfomedicsPortal_TreatmentId = 8d0fec4d-4cdc-4872-ad4e-62fc0bc755ce
+
+### Get list of treatments
+GET {{InfomedicsPortal_HostAddress}}/treatments/
+Accept: application/json
+
+### Get list of dentists
+GET {{InfomedicsPortal_HostAddress}}/dentists/
+Accept: application/json
+
+### Get All Appointments
+GET {{InfomedicsPortal_HostAddress}}/appointments
+Accept: application/json
+
+### Get All Patients
+GET {{InfomedicsPortal_HostAddress}}/patients/
+Accept: application/json
+
+### Add Patient
+POST {{InfomedicsPortal_HostAddress}}/patients/
+Content-Type: application/json
+
+{
+    "fullName": "Ygor H. Randes",
+    "address": "Imaginary Road 12, Imaginary Town",
+    "photo": "binaryFile"
+}
+
+### Get Patient
+GET {{InfomedicsPortal_HostAddress}}/patients/{{InfomedicsPortal_PatientId}}
+Accept: application/json
+
+### Get All Appointments for a Patient
+GET {{InfomedicsPortal_HostAddress}}/appointments/{{InfomedicsPortal_PatientId}}
+Accept: application/json
+
+### Post Patient Appointment
+POST {{InfomedicsPortal_HostAddress}}/appointments/
+Content-Type: application/json
+
+{
+  "patientId": "{{InfomedicsPortal_PatientId}}",
+  "appointmentDateTime": "2025-07-10T12:30:00",
+  "dentistId": "{{InfomedicsPortal_DentistId}}",
+  "treatmentId": "{{InfomedicsPortal_TreatmentId}}"
+}
+
