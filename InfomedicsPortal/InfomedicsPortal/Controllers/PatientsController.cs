@@ -17,7 +17,7 @@ public class PatientsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Patient>> PostPatient(Patient patient)
+    public async Task<ActionResult<Patient>> PostPatient([FromBody] PatientsService.NewPatientRequest patient)
     {
         var execResult = await _patientsService.AddPatient(patient);
         if (!execResult.IsSuccess)

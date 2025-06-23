@@ -6,4 +6,5 @@ public class Patient
     public string FullName { get; set; }
     public string Address { get; set; }
     public string Photo { get; set; }
+    public DateTime CreatedAtUtc { get; set; }
 }

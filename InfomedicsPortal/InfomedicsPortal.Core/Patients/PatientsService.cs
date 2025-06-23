@@ -15,7 +15,7 @@ public class PatientsService
         return getPatientResult;
     }
 
-    public async Task<ExecutionResult<Patient>> AddPatient(Patient patient)
+    public async Task<ExecutionResult<Patient>> AddPatient(NewPatientRequest patient)
     {
         if (string.IsNullOrEmpty(patient.FullName))
         {
@@ -27,12 +27,19 @@ public class PatientsService
             return ExecutionResult<Patient>.Failure("Address is required");
         }
         
-        if (string.IsNullOrEmpty(patient.Photo))
-        {
-            return ExecutionResult<Patient>.Failure("Photo is required");
-        }
+        // if (string.IsNullOrEmpty(patient.Photo))
+        // {
+        //     return ExecutionResult<Patient>.Failure("Photo is required");
+        // }
 
-        var addResult = await _storage.AddPatientAsync(patient);
+        var addResult = await _storage.AddPatientAsync(new Patient()
+        {
+            Id = Guid.NewGuid(),
+            FullName = patient.FullName,
+            Address = patient.Address,  
+            Photo = patient.Photo,
+            CreatedAtUtc = DateTime.UtcNow,
+        });
         return ExecutionResult<Patient>.Success(addResult);
     }
     
@@ -40,5 +47,12 @@ public class PatientsService
     {
         var getPatientResult = await _storage.GetAllPatientsAsync();
         return getPatientResult;
+    }
+
+    public class NewPatientRequest
+    {
+        public string FullName { get; set; }
+        public string Address { get; set; }
+        public string Photo { get; set; }
     }
 }

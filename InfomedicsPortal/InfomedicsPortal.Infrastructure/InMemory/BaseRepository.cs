@@ -4,12 +4,19 @@ namespace InfomedicsPortal.Infrastructure.InMemory;
 
 public class BaseRepository<TEntity, TKey> where TEntity : class
 {
-    private readonly ConcurrentDictionary<TKey, TEntity> _entities = new ConcurrentDictionary<TKey, TEntity>();
+    private readonly ConcurrentDictionary<TKey, TEntity> _entities;
     private readonly Func<TEntity, TKey> _keySelector;
 
     public BaseRepository(Func<TEntity, TKey> keySelector)
     {
         _keySelector = keySelector ?? throw new ArgumentNullException(nameof(keySelector));
+        _entities = new ConcurrentDictionary<TKey, TEntity>();
+    }
+    
+    public BaseRepository(Func<TEntity, TKey> keySelector, ConcurrentDictionary<TKey, TEntity> intialCollection)
+    {
+        _keySelector = keySelector ?? throw new ArgumentNullException(nameof(keySelector));
+        _entities = intialCollection ??  throw new ArgumentNullException(nameof(intialCollection));
     }
 
     public async Task<TEntity> AddAsync(TEntity entity)

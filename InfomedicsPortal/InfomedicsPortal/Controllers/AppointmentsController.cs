@@ -23,7 +23,7 @@ public class AppointmentsController : ControllerBase
     }
     
     [HttpGet("{patientId}")]
-    public async Task<ActionResult<AppointmentsService.PatientAppointment>> GetAppointmentsByPatientidAsync([FromRoute] Guid patientId)
+    public async Task<ActionResult<Appointment[]>> GetAppointmentsByPatientidAsync([FromRoute] Guid patientId)
     {
         var patientAppointments = await _service.GetAppointmentsByPatientIdAsync(patientId);
         if (patientAppointments == null)

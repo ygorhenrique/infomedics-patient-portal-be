@@ -12,6 +12,14 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "LocalCorsPolicy",
+        builder => builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 builder.Services.AddScoped<AppointmentsService>();
 builder.Services.AddScoped<DentistsService>();
 builder.Services.AddScoped<PatientsService>();
@@ -29,6 +37,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCors("LocalCorsPolicy");
 
 app.UseHttpsRedirection();
 

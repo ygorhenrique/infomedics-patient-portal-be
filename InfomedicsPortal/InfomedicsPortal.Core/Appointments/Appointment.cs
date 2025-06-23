@@ -9,7 +9,8 @@ public class Appointment
     public Guid TreatmentId { get; set; }
     public DateTime CreationDateUtc { get; set; }
     public DateTime LastModifiedDateUtc { get; set; }
-    
+    public string Status { get; set; } = "scheduled";
+
     // possible enhacements
     // public status Scheduled (scheduled, done, noshow)
 }
