@@ -10,9 +10,4 @@
       <ProjectReference Include="..\InfomedicsPortal.Core\InfomedicsPortal.Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Cache\" />
-      <Folder Include="PostgreSQL\" />
-    </ItemGroup>
-
 </Project>

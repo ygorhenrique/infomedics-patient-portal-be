@@ -9,7 +9,7 @@ public class TreatmentsService : ITreatmentsService
         this._storage = storage;
     }
 
-    public async Task<Treatment[]> GetAllTreatments()
+    public async Task<Treatment[]> GetAllTreatmentsAsync()
     {
         var getAllResult = await _storage.GetAllTreatmentsAsync();
         return getAllResult;

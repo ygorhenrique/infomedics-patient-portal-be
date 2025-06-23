@@ -25,7 +25,7 @@ public partial class PatientsService : IPatientsService
         return new PatientWithAppointments(getPatientResult, appointments);
     }
 
-    public async Task<ExecutionResult<Patient>> AddPatient(NewPatientRequest patient)
+    public async Task<ExecutionResult<Patient>> AddPatientAsync(NewPatientRequest patient)
     {
         if (string.IsNullOrEmpty(patient.FullName))
         {

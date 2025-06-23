@@ -19,7 +19,7 @@ public class TreatmentsController : ControllerBase
     [HttpGet]
     public async Task<Treatment[]> GetAll()
     {
-        var result = await _service.GetAllTreatments();
+        var result = await _service.GetAllTreatmentsAsync();
         return result;
     }
 }

@@ -22,7 +22,7 @@ public class PatientsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Patient>> PostPatient([FromBody] NewPatientRequest patient)
     {
-        var execResult = await _patientsService.AddPatient(patient);
+        var execResult = await _patientsService.AddPatientAsync(patient);
         if (!execResult.IsSuccess)
         {
             _logger.LogWarning("Failed to create patient: {Message}", execResult.Message);

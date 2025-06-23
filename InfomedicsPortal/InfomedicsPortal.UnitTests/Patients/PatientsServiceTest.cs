@@ -117,7 +117,7 @@ public class PatientsServiceTests
         _storageMock.Setup(x => x.AddPatientAsync(It.IsAny<Patient>())).ReturnsAsync(expectedPatient);
 
         // Act
-        var result = await _service.AddPatient(request);
+        var result = await _service.AddPatientAsync(request);
 
         // Assert
         Assert.True(result.IsSuccess);
@@ -136,7 +136,7 @@ public class PatientsServiceTests
         };
 
         // Act
-        var result = await _service.AddPatient(request);
+        var result = await _service.AddPatientAsync(request);
 
         // Assert
         Assert.False(result.IsSuccess);
@@ -155,7 +155,7 @@ public class PatientsServiceTests
         };
 
         // Act
-        var result = await _service.AddPatient(request);
+        var result = await _service.AddPatientAsync(request);
 
         // Assert
         Assert.False(result.IsSuccess);
