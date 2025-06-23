@@ -18,6 +18,17 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "ProductionCorsPolicy",
+        builder => builder
+            .WithOrigins(
+                "https://*.randes.me")
+            .SetIsOriginAllowedToAllowWildcardSubdomains()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructure();
 
@@ -29,6 +40,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.UseCors("LocalCorsPolicy");
 }
+else
+{
+    app.UseCors("ProductionCorsPolicy");
+}
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
@@ -37,6 +52,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGet("/", () => "Infomedics Api!");
 
 app.Run();
 
